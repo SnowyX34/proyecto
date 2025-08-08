@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { Products } from '@shared/dto/product.dto';
+import { ProductAttributes } from '@shared/dto/product.dto';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment'; 
@@ -13,9 +13,13 @@ import { environment } from '../../../../../environments/environment';
 })
 export class AdminProductsComponent implements OnInit {
 
-  products: Products[] = [];
-  newProduct: Products = { modelo: '', color: '', costo_m2: 0, img_Url: '', productType:''};
-  editingProduct: Products | null = null;
+  products: ProductAttributes[] = [];
+  newProduct: ProductAttributes = {
+    modelo: '', color: '', costo_m2: 0, img_Url: '', productType: '',
+    product_id: 0,
+    descripcion: ''
+  };
+  editingProduct: ProductAttributes | null = null;
   selectedFile: File | null = null;
   selectedFileForEdit: File | null = null; // ✅ Agregado: archivo separado para edición
 
@@ -44,7 +48,7 @@ export class AdminProductsComponent implements OnInit {
 
   fetchProducts(): void {
     this._productService.getAll().subscribe({
-      next: (data) => {
+      next: (data: ProductAttributes[]) => {
         console.log('Productos recibidos:', data);
         this.products = data;
       },
@@ -85,7 +89,9 @@ export class AdminProductsComponent implements OnInit {
       next: () => {
         this.toastr.success('Producto agregado');
         this.fetchProducts();
-        this.newProduct = { modelo: '', color: '', costo_m2: 0, img_Url: '', productType: ''};
+        this.newProduct = { modelo: '', color: '', costo_m2: 0, img_Url: '', productType: '',
+    product_id: 0,
+    descripcion: ''};
         this.selectedFile = null;
         // ✅ Limpiar el input file
         this.clearFileInput();
