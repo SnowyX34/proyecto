@@ -49,7 +49,7 @@ import { ProductsComponent } from './features/store/pages/home-page/home-page';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    Reactive
+    ReactiveFormsModule,
 ],
   bootstrap: [AppComponent],
   providers: [
