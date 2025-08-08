@@ -1,8 +1,7 @@
-// src/app/auth/services/product.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http'; // Asegúrate de importar HttpParams
 import { Observable } from 'rxjs';
-import { Products } from '@shared/dto/product.dto';
+import { ProductAttributes } from '@shared/dto/product.dto';
 import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
@@ -17,9 +16,21 @@ export class ProductService {
     this.myApiUrl = 'products';
   }
 
-  getAll(): Observable<Products[]> {
+  // MODIFICADO: Ahora acepta un productType opcional para filtrar
+  getAlls(productType?: string): Observable<ProductAttributes[]> {
     const url = `${this.myAppUrl}${this.myApiUrl}`;
-    return this.http.get<Products[]>(url);
+    let params = new HttpParams();
+
+    if (productType) {
+      params = params.append('productType', productType);
+    }
+
+    console.log('ProductService: Obteniendo productos de:', url, 'con params:', params.toString());
+    return this.http.get<ProductAttributes[]>(url, { params });
+  }
+   getAll(): Observable<ProductAttributes[]> {
+    const url = `${this.myAppUrl}${this.myApiUrl}`;
+    return this.http.get<ProductAttributes[]>(url);
   }
 
   addProductFormData(formData: FormData): Observable<any> {
@@ -27,7 +38,7 @@ export class ProductService {
     return this.http.post(url, formData);
   }
 
-  updateProduct(product: Products): Observable<any> {
+  updateProduct(product: ProductAttributes): Observable<any> {
     const url = `${this.myAppUrl}${this.myApiUrl}/${product.product_id}`;
     return this.http.put(url, product);
   }
@@ -43,20 +54,26 @@ export class ProductService {
   }
 
   getImageUrl(imagePath: string): string {
-    
     if (!imagePath) {
-      const defaultUrl = `${this.myAppUrl}uploads/default-product.png`;
-      return defaultUrl;
+      return 'https://via.placeholder.com/400x300/cccccc/666666?text=Sin+Imagen';
     }
     if (imagePath.startsWith('http')) {
       return imagePath;
     }
     const cleanPath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
-    const finalUrl = `${this.myAppUrl}${cleanPath}`;    
-    return finalUrl;
+    return `${this.myAppUrl}${cleanPath}`;
   }
-  getByIdProduct(id: string | number): Observable<Products> {
+
+  getOptimizedImageUrl(imagePath: string, width: number = 400, height: number = 300): string {
+    const baseUrl = this.getImageUrl(imagePath);
+    if (baseUrl.includes('cloudinary.com')) {
+      return baseUrl.replace('/upload/', `/upload/w_${width},h_${height},c_fill,q_auto,f_webp/`);
+    }
+    return baseUrl;
+  }
+
+  getByIdProduct(id: string | number): Observable<ProductAttributes> {
     const url = `${this.myAppUrl}${this.myApiUrl}/${id}`;
-    return this.http.get<Products>(url);
+    return this.http.get<ProductAttributes>(url);
   }
 }

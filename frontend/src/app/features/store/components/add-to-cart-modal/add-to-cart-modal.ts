@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductAttributes } from '@shared/dto/product.dto';
+import { ProductAttributes, Products } from '@shared/dto/product.dto';
 import { CartService } from '../../services/cart.service';
 import { CotizacionItem } from '@shared/dto/quotation.dto';
 
@@ -12,7 +12,7 @@ import { CotizacionItem } from '@shared/dto/quotation.dto';
 })
 export class AddToCartModalComponent {
   @Input() isOpen = false;
-  @Input() product?: ProductAttributes;
+  @Input() product?: Products;
   @Output() close = new EventEmitter<void>();
   @Output() productAdded = new EventEmitter<void>();
 
