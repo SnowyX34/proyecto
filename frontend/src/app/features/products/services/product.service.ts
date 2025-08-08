@@ -55,4 +55,8 @@ export class ProductService {
     const finalUrl = `${this.myAppUrl}${cleanPath}`;    
     return finalUrl;
   }
+  getByIdProduct(id: string | number): Observable<Products> {
+    const url = `${this.myAppUrl}${this.myApiUrl}/${id}`;
+    return this.http.get<Products>(url);
+  }
 }

@@ -5,17 +5,22 @@ import { SignInComponent } from './features/auth/pages/register/register';
 import { HomeComponent } from './features/home/pages/home/home'; 
 import { AdminProductsComponent } from './features/products/pages/products/products'; 
 import { AuthGuard } from './core/utilities/auth.guard';
-import { CartComponent } from './features/cart/pages/cart/cart';
+import { ProductsComponent } from './features/store/pages/home-page/home-page';
+import { AdminQuotationsViewComponent } from './features/store/components/admin-quotations-view/admin-quotations-view';
+import { CartViewComponent } from './features/store/components/cart-view/cart-view';
 
 
 const routes: Routes = [
+  { path: 'Home', component: HomeComponent },
   { path: 'login', component: Logins },
   { path: 'signIn', component: SignInComponent },
-  { path: 'Home', component: HomeComponent },
   { path: 'Dashboard', component: AdminProductsComponent},
-  { path: 'Cart', component: CartComponent},
+  { path: 'Products', component: ProductsComponent},
+  { path: 'Quotations', component: AdminQuotationsViewComponent},
+  { path: 'view', component: CartViewComponent},
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
   { path: '**', redirectTo: 'Home', pathMatch: 'full' },
+  
 ];
 
 @NgModule({

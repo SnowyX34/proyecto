@@ -1,0 +1,63 @@
+<!-- header.html (ACTUALIZADO) -->
+<header class="flex items-center justify-between h-16 px-4 border-b md:px-6 bg-white shadow-sm">
+  <div class="flex items-center space-x-6">
+    <a (click)="navigateToHome()" class="font-bold text-xl text-blue-600 cursor-pointer hover:text-blue-700 transition-colors">
+      Mi Tienda
+    </a>
+    <nav class="hidden md:flex items-center space-x-4">
+      <a (click)="navigateToHome()" class="font-medium hover:text-blue-600 cursor-pointer transition-colors">Inicio</a>
+      <a (click)="navigateToCategories()" class="font-medium hover:text-blue-600 cursor-pointer transition-colors">Categorías</a>
+      <a (click)="navigateToOffers()" class="font-medium hover:text-blue-600 cursor-pointer transition-colors">Ofertas</a>
+      <a (click)="navigateToContact()" class="font-medium hover:text-blue-600 cursor-pointer transition-colors">Contacto</a>
+    </nav>
+  </div>
+
+  <div class="flex items-center space-x-4 flex-1 max-w-md mx-4">
+    <div class="relative w-full">
+      <input 
+        type="search"
+        placeholder="Buscar productos, marcas y más..."
+        class="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="onSearch()"
+      />
+      <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <!-- Cart button with counter -->
+    <button 
+      class="relative p-2 text-gray-600 hover:text-blue-600 transition-colors" 
+      (click)="openCart()"
+      title="Ver carrito"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m-2.4 0L3 3H1m6 10v6a2 2 0 002 2h8a2 2 0 002-2v-6m-10 0V9a2 2 0 012-2h4a2 2 0 012 2v4.01"></path>
+      </svg>
+      <span 
+        *ngIf="cartItemCount > 0"
+        class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full min-w-[1.25rem] h-5 flex items-center justify-center px-1 animate-pulse"
+      >
+        {{ cartItemCount > 99 ? '99+' : cartItemCount }}
+      </span>
+    </button>
+
+    <!-- Login button -->
+    <button 
+      class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium" 
+      (click)="login()"
+    >
+      Iniciar Sesión
+    </button>
+
+    <!-- Mobile menu button (optional) -->
+    <button class="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</header>
