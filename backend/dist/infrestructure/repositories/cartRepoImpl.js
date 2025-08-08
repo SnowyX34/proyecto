@@ -7,10 +7,13 @@ exports.CartRepository = void 0;
 const connection_1 = __importDefault(require("../../config/connection"));
 const sequelize_1 = require("sequelize");
 class CartRepository {
-    async addToCart(user_id, product_id, quantity) {
+    static create(arg0) {
+        throw new Error('Method not implemented.');
+    }
+    async addToCart(cart_id, user_id, product_id, quantity, model, height, width, precio_total) {
         const sql = `
-      INSERT INTO cart (user_id, product_id, quantity)
-      VALUES (?, ?, ?)
+      INSERT INTO cart (quote_id, user_id, product_id, model, height, width, quantity, precio_total)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE quantity = quantity + ?
     `;
         await connection_1.default.query(sql, {

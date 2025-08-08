@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+<div class="min-h-screen bg-gray-50 p-6">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+    <!-- Filtros -->
+    <div class="lg:w-1/4 space-y-6">
+      <div class="bg-white rounded-lg shadow-sm p-6 border">
+        <h3 class="text-xl font-semibold mb-4">Categorías</h3>
+        <div class="space-y-2">
+          <div *ngFor="let type of productTypes" class="flex items-center">
+            <input
+              type="checkbox"
+              [id]="type"
+              [value]="type"
+              [checked]="selectedProductType === type"
+              (change)="onProductTypeChange(type)"
+              class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <label [for]="type" class="ml-2 text-gray-700">{{ type }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-6 border">
+        <h3 class="text-xl font-semibold mb-4">Precio por m²</h3>
+        <div class="flex items-center justify-between text-gray-600 text-sm">
+          <span>$0</span>
+          <span>$2000+</span>
+        </div>
+        <input type="range" min="0" max="2000" value="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-2" />
+      </div>
+    </div>
+
+    <!-- Productos -->
+    <div class="lg:w-3/4">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Productos Destacados</h2>
+
+      <div *ngIf="products.length === 0" class="text-center py-10 text-gray-500">
+        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 15h4M12 18v-3"/>
+        </svg>
+        <p class="font-medium">No hay productos disponibles para esta categoría.</p>
+        <p class="text-sm text-gray-400">Intenta seleccionar otra categoría o busca un producto.</p>
+      </div>
+
+      <div *ngIf="products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <app-product-card
+          *ngFor="let product of products"
+          [product]="product"
+          (openAddToCart)="openAddToCart($event)">
+        </app-product-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-to-cart-modal
+  [isOpen]="showAddToCartModal"
+  [product]="selectedProductForModal"
+  (close)="closeAddToCart()"
+  (productAdded)="onProductAdded()">
+</app-add-to-cart-modal>

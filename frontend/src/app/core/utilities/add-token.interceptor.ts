@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { ErrorService } from '../../auth/services/error.service'
+import { ErrorService } from '../../features/auth/services/error.service';
 
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
@@ -26,11 +26,10 @@ export class AddTokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log('AuthInterceptor: Error Response Headers:', error.headers);
         if (error.status === 401 || error.status === 403) {
           localStorage.removeItem('token');
           this._errorService.msjError(error);
-          this.router.navigate(['/login']);
-          window.location.reload();
         }
 
         return throwError(() => error);

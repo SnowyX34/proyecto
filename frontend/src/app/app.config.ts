@@ -1,13 +1,23 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+// import { HttpClient } from '@angular/common/http';
+// import { Injectable } from '@angular/core';
 
-import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+// export interface AddToCartDTO {
+//   user_id: number;
+//   product_id: number;
+//   model: string;
+//   height: string;
+//   width: string;
+//   quantity: number;
+//   precio_total: number;
+// }
 
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay())
-  ]
-};
+// @Injectable({ providedIn: 'root' })
+// export class CartService {
+//   private apiUrl = 'http://localhost:3000/api/cart';
+
+//   constructor(private http: HttpClient) {}
+
+//   addToCart(data: AddToCartDTO) {
+//     return this.http.post(this.apiUrl, data);
+//   }
+// }
