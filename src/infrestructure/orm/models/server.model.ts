@@ -1,14 +1,14 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import routesUser from '../../../interfaces/routes/user.routes';
-import routesCotizaciones from '../../../interfaces/routes/cotizaciones.routes'
+import routesCotizaciones from '../../../interfaces/routes/cotizaciones.routes';
 import routesProduct from '../../../interfaces/routes/product.routes'
-import { User } from '../models/user.model'; // Importación con nombre
-import { Product } from '../models/product.model';
-import Quotation from '../models/quotation.model';
-import QuotationItem from '../models/quotation-item.model';
+import {User} from './user.model';
 import path from 'path';
-import sequelize from '../../../config/connection';
+import { Product } from './product.model';
+import Quotation from "../models/quotation.model";
+import  QuotationItem  from '../models/quotation-item.model';
+
 
 class Server {
     private readonly app: Application;
