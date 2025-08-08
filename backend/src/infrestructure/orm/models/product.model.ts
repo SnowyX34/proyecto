@@ -1,7 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../../../config/connection';
 
-export class Product extends Model {}
+export class Product extends Model {
+  static associate(models: any) {
+    // Aquí define relaciones, si las tienes
+  }
+}
 
 Product.init({
   product_id: {
@@ -22,11 +26,11 @@ Product.init({
     allowNull: false,
   },
   img_Url:{
-    type:DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   productType:{
-    type:DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   }
 }, {

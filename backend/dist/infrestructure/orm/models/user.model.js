@@ -3,13 +3,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserInstance = void 0;
+exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../../../config/connection")); // Asegúrate de que apunta correctamente
-class UserInstance extends sequelize_1.Model {
+// CAMBIO: La clase User ahora es el modelo exportado directamente
+class User extends sequelize_1.Model {
+    // Método estático para definir las asociaciones
+    static associate(models) {
+        var _a;
+        console.log('User.associate called. models.Quotation:', models.Quotation ? 'Defined' : 'Undefined', 'models.Quotation.name:', (_a = models.Quotation) === null || _a === void 0 ? void 0 : _a.name);
+        User.hasMany(models.Quotation, {
+            foreignKey: 'user_id',
+            as: 'quotations',
+            sourceKey: 'user_id'
+        });
+    }
 }
-exports.UserInstance = UserInstance;
-const User = connection_1.default.define('users', {
+exports.User = User;
+// Inicialización del modelo (ahora en la propia clase User)
+User.init({
     user_id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
@@ -48,7 +60,10 @@ const User = connection_1.default.define('users', {
         defaultValue: '/uploads/default-user.png',
     },
 }, {
-    tableName: 'Users',
+    sequelize: connection_1.default,
+    modelName: 'User', // CAMBIO: modelName a 'User'
+    tableName: 'users', // CAMBIO: tableName a 'users' (minúsculas, consistente con Sequelize)
     timestamps: false
 });
-exports.default = User;
+// CAMBIO: Exportar User directamente (ya no es default)
+// export default User; // REMOVIDO
