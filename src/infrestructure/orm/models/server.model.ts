@@ -3,9 +3,9 @@ import cors from 'cors';
 import routesUser from '../../../interfaces/routes/user.routes';
 import routesCotizaciones from '../../../interfaces/routes/cotizaciones.routes';
 import routesProduct from '../../../interfaces/routes/product.routes'
-import {User} from './user.model';
+import {User} from '../models/user.model';
 import path from 'path';
-import { Product } from './product.model';
+import { Product } from '../models/product.model';
 import Quotation from "../models/quotation.model";
 import  QuotationItem  from '../models/quotation-item.model';
 
