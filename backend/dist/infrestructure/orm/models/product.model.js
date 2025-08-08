@@ -16,6 +16,7 @@ class Product extends sequelize_1.Model {
         //   as: 'quotationItems',
         //   sourceKey: 'product_id'
         // });
+
     }
 }
 exports.Product = Product;

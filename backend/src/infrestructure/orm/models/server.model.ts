@@ -8,7 +8,6 @@ import { Product } from '../models/product.model';
 import Quotation from '../models/quotation.model';
 import QuotationItem from '../models/quotation-item.model';
 import path from 'path';
-
 class Server {
     private readonly app: Application;
     private readonly port: string;
@@ -43,7 +42,6 @@ class Server {
             });
         });
     }
-
     private middlewares() {
         this.app.use(express.json());
         this.app.use(cors({

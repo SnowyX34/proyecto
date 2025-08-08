@@ -11,11 +11,11 @@ export class LoginService {
   private readonly myApiUrl: string;
   constructor(private readonly http: HttpClient) {
     this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/users/login';
+    this.myApiUrl = 'users/login';
   }
 
   login(user: Login): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.myAppUrl}${this.myApiUrl}`, user);
 }
-
+//nota para comit
 }

@@ -10,7 +10,6 @@ import { CartViewComponent } from './features/store/components/cart-view/cart-vi
 import { AdminQuotationsViewComponent } from './features/store/components/admin-quotations-view/admin-quotations-view';
 
 
-
 const routes: Routes = [
   { path: 'Home', component: HomeComponent },
   { path: 'login', component: Logins },

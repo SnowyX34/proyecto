@@ -13,7 +13,11 @@ export class ProductService {
 
   constructor(private readonly http: HttpClient) {
     this.myAppUrl = environment.endpoint;
+<<<<<<< HEAD
     this.myApiUrl = 'api/products';
+=======
+    this.myApiUrl = 'products';
+>>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
   }
 
   // MODIFICADO: Ahora acepta un productType opcional para filtrar

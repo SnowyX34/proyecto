@@ -1,6 +1,5 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../../../config/connection';
-
 // Interfaz para los atributos del modelo Product
 export interface ProductAttributes {
   product_id: number;

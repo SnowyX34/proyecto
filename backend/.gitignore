@@ -1,1 +1,17 @@
+<<<<<<< HEAD
 node_modules
+=======
+# Node modules para backend y frontend
+/node_modules
+/frontend/node_modules
+/backend/node_modules
+
+# Carpeta dist solo del backend
+/backend/dist
+
+# Archivos de entorno
+.env
+
+# Logs
+*.log
+>>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592

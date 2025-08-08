@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 // routes/cart.routes.ts
 const express_1 = require("express");
 const cart_controller_1 = require("../controllers/cart.controller");
@@ -14,4 +15,10 @@ router.post('/add', cart_controller_1.addToCart);
 router.put('/:id', cart_controller_1.updateCartItem);
 // DELETE /api/cart/:id - Eliminar item del carrito
 router.delete('/:id', cart_controller_1.deleteCartItem);
+=======
+const express_1 = require("express");
+const cart_controller_1 = require("../controllers/cart.controller");
+const router = (0, express_1.Router)();
+router.post('/cart', cart_controller_1.addCart);
+>>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
 exports.default = router;
