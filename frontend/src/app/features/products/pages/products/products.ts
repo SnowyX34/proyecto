@@ -103,7 +103,7 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  editProduct(product: Products): void {
+  editProduct(product: ProductAttributes): void {
     this.editingProduct = { ...product };
     this.selectedFileForEdit = null; // ✅ Limpiar archivo de edición al empezar
   }
