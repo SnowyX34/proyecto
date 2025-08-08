@@ -16,8 +16,8 @@
     "module": "preserve",
     "baseUrl": "./",
     "paths": {
-  "@shared/*": ["shared/*"]
-}
+      "@shared/*": ["shared/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
