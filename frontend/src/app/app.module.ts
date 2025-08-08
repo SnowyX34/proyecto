@@ -17,7 +17,11 @@ import { AdminProductsComponent } from './features/products/pages/products/produ
 
 import { AddTokenInterceptor } from '../app/core/utilities/add-token.interceptor';
 import { Navbar } from './features/navbar/pages/navbar/navbar'; 
-import { CartComponent } from './features/cart/pages/cart/cart';
+import { ProductCardComponent } from './features/store/components/product-card/product-card';
+import { CartViewComponent } from './features/store/components/cart-view/cart-view';
+import { AddToCartModalComponent } from './features/store/components/add-to-cart-modal/add-to-cart-modal';
+import { AdminQuotationsViewComponent } from './features/store/components/admin-quotations-view/admin-quotations-view';
+import { ProductsComponent } from './features/store/pages/home-page/home-page';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,11 @@ import { CartComponent } from './features/cart/pages/cart/cart';
     HomeComponent,
     Navbar,
     AdminProductsComponent,
-    CartComponent
+    ProductCardComponent,
+    CartViewComponent,
+    AddToCartModalComponent,
+    AdminQuotationsViewComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,7 @@ import { CartComponent } from './features/cart/pages/cart/cart';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    Reactive
 ],
   bootstrap: [AppComponent],
   providers: [
