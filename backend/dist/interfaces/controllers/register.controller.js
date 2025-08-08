@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = void 0;
 const express_validator_1 = require("express-validator");
-const user_model_1 = __importDefault(require("../../infrestructure/orm/models/user.model"));
+const user_model_1 = require("../../infrestructure/orm/models/user.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const registerUser = async (req, res) => {
     const errors = (0, express_validator_1.validationResult)(req);
@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
     }
     try {
         // Validamos si el usuario existe en la base de datos
-        const existingUser = await user_model_1.default.findOne({ where: { email: email } });
+        const existingUser = await user_model_1.User.findOne({ where: { email: email } });
         if (existingUser) {
             res.status(400).json({
                 msg: 'El correo electrónico ya está registrado'
@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
         // Hashear la contraseña
         const hashedPassword = await bcryptjs_1.default.hash(password, 10);
         // Crear el usuario
-        const newUser = await user_model_1.default.create({
+        const newUser = await user_model_1.User.create({
             user_name: user_name,
             password: hashedPassword,
             user_secondName,

@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_routes_1 = __importDefault(require("../../../interfaces/routes/user.routes"));
-const cotizaciones_routes_1 = __importDefault(require("../../../interfaces/routes/cotizaciones.routes"));
+const cotizaciones_routes_1 = __importDefault(require("@routes/cotizaciones.routes"));
 const product_routes_1 = __importDefault(require("../../../interfaces/routes/product.routes"));
-const user_model_1 = require("../models/user.model"); // Importación con nombre
+const user_model_1 = require("../models/user.model");
+const path_1 = __importDefault(require("path"));
 const product_model_1 = require("../models/product.model");
 const quotation_model_1 = __importDefault(require("../models/quotation.model"));
 const quotation_item_model_1 = __importDefault(require("../models/quotation-item.model"));
-const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
         var _a;

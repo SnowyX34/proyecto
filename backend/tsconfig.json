@@ -9,9 +9,16 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+ "baseUrl": "./src",
+    "paths": {
+      "@interfaces/*": ["interfaces/*"],
+      "@infrastructure/*": ["infrestructure/*"],
+      "@models/*": ["infrestructure/orm/models/*"],
+      "@routes/*": ["interfaces/routes/*"]
+    }
   },
   "include": [
-    "src/**/*.ts",
+    "src/**/*.ts"
   ]
 }

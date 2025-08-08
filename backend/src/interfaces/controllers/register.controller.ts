@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import User from '../../infrestructure/orm/models/user.model';
+import {User} from '../../infrestructure/orm/models/user.model';
 import bcrypt from 'bcryptjs';
 
 export const registerUser = async (req: Request, res: Response) => {

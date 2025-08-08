@@ -7,6 +7,9 @@ exports.Product = void 0;
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../../../config/connection"));
 class Product extends sequelize_1.Model {
+    static associate(models) {
+        // Aquí define relaciones, si las tienes
+    }
 }
 exports.Product = Product;
 Product.init({

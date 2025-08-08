@@ -1,14 +1,14 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import routesUser from '../../../interfaces/routes/user.routes';
-import routesCotizaciones from '../../../interfaces/routes/cotizaciones.routes'
+import cotizacionesRoutes from '@routes/cotizaciones.routes';
 import routesProduct from '../../../interfaces/routes/product.routes'
-import { User } from '../models/user.model'; // Importación con nombre
-import { Product } from '../models/product.model';
-import Quotation from '../models/quotation.model';
-import QuotationItem from '../models/quotation-item.model';
+import {User} from '../models/user.model';
 import path from 'path';
-import sequelize from '../../../config/connection';
+import { Product } from '../models/product.model';
+import Quotation from "../models/quotation.model";
+import  QuotationItem  from '../models/quotation-item.model';
+
 
 class Server {
     private readonly app: Application;
@@ -34,7 +34,7 @@ class Server {
     private routes() {
         this.app.use('/api/users', routesUser);
         this.app.use('/api/products', routesProduct);
-        this.app.use('/api/cotizaciones', routesCotizaciones);
+        this.app.use('/api/cotizaciones', cotizacionesRoutes);
         const uploadsPath = path.join(process.cwd(), 'uploads');
         this.app.use('/uploads', express.static(path.join(__dirname, '../../../../uploads')));
         this.app.get('/test', (req, res) => {

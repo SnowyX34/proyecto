@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = void 0;
 const express_validator_1 = require("express-validator");
-const user_model_1 = __importDefault(require("../../infrestructure/orm/models/user.model"));
+const user_model_1 = require("../../infrestructure/orm/models/user.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const loginUser = async (req, res) => {
@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
         return;
     }
     const { email, password } = req.body;
-    const user = await user_model_1.default.findOne({ where: { email: email } });
+    const user = await user_model_1.User.findOne({ where: { email: email } });
     if (!user) {
         res.status(400).json({
             msg: `Ha ocurrido un problema, vuelve a intentar`
