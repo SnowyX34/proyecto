@@ -9,12 +9,6 @@ RUN npm install
 COPY . .
 RUN npm run build -- --configuration=production --project=frontend
 
-# Etapa 2: NGINX
-FROM nginx:alpine
-
-# Copiar build Angular
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
-
 # # Opcional: Copiar configuración personalizada de nginx
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 
