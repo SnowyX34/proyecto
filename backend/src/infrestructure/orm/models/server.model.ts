@@ -42,13 +42,27 @@ class Server {
             });
         });
     }
+
     private middlewares() {
-        this.app.use(express.json());
-        this.app.use(cors({
-            origin: 'https://proyecto-1-yx7j.onrender.com',
-            credentials: true
-        }));
-    }
+    this.app.use(express.json());
+    
+    // Configuración CORS con variables de entorno
+    const allowedOrigins = process.env.ALLOWED_ORIGINS 
+        ? process.env.ALLOWED_ORIGINS.split(',')
+        : [
+            'https://proyecto-1-yx7j.onrender.com',
+            'http://localhost:4200'
+        ];
+
+    console.log('CORS Origins permitidos:', allowedOrigins);
+
+    this.app.use(cors({
+        origin: allowedOrigins,
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    }));
+}
 
     private async dbConnect() {
         try {
