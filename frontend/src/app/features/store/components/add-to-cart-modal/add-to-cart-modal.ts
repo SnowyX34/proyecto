@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { ProductAttributes } from '@shared/dto/product.dto';
-=======
-import { ProductAttributes, } from '@shared/dto/product.dto';
->>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
 import { CartService } from '../../services/cart.service';
 import { CotizacionItem } from '@shared/dto/quotation.dto';
 

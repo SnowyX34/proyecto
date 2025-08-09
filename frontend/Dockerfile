@@ -1,14 +1,3 @@
-
-# FROM node:18-alpine AS build
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build --configuration production
-
-# FROM nginx:alpine
-# COPY --from=build /app/dist/Cotizacoines/usr/share/nginx/html
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Etapa 1: build Angular
 FROM node:20.19.1-alpine AS build
 
@@ -34,4 +23,3 @@ EXPOSE 80
 
 # Ejecutar NGINX en primer plano
 CMD ["nginx", "-g", "daemon off;"]
-

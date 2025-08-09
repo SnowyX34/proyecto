@@ -8,11 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-products',
   templateUrl: './home-page.html',
   styleUrls: ['./home-page.css'],
-<<<<<<< HEAD
   standalone: false
-=======
-  standalone:false
->>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
 })
 export class ProductsComponent implements OnInit {
   products: ProductAttributes[] = [];
