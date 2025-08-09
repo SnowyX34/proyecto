@@ -5,7 +5,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER ?? 'ulis',
   process.env.DB_PASSWORD ?? 'FiHjAPjq6FEpYrusamf9XP31NuPuPEwE',
   {
-    host: process.env.DB_HOST ?? 'd2bgu5p5pdvs73cofn2g-a.oregon-postgres.render.com',
+    host: process.env.DB_HOST ?? 'dpg-d20kog7fte5s7391c7lg-a.oregon-postgres.render.com',
     port: parseInt(process.env.DB_PORT ?? '5432'),
     dialect: 'postgres',
     logging: false,
@@ -13,7 +13,14 @@ const sequelize = new Sequelize(
       ssl: {
         require: true,
         rejectUnauthorized: false
-      }
+      },
+      keepAlive: true
+    },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
     }
   }
 );
