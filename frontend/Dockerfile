@@ -13,13 +13,13 @@ RUN npm install
 COPY . .
 
 # Build the Angular app for production
-RUN npm run build -- --configuration=production --project=frontend
+RUN npm run build --configuration=production
 
 # Stage 2: Serve with nginx
 FROM nginx:alpine
 
 # Copy built Angular app from build stage
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Optional: Copy custom nginx configuration
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
