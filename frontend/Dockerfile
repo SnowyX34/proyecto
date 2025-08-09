@@ -4,10 +4,13 @@ FROM node:20.19.1-alpine AS build
 WORKDIR /app
 
 # Copy package files first for better caching
-COPY package*.json ./
+COPY package.json package-lock.json ./
+
+# Debug: Check what files were copied
+RUN ls -la
 
 # Install dependencies
-RUN npm ci --only=production=false
+RUN npm ci
 
 # Copy source code
 COPY . .
@@ -25,8 +28,8 @@ FROM nginx:alpine
 # Adjust this path based on your actual build output
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# # Copy custom nginx configuration
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
