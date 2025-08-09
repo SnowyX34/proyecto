@@ -9,8 +9,8 @@ import { CotizacionItem, CreateQuotationDTO, Quotation, QuotationItemDTO } from 
   providedIn: 'root'
 })
 export class CotizacionService {
-  private readonly API_URL = `${environment.endpoint}api/cotizaciones`;
-  private readonly PRODUCTS_URL = `${environment.endpoint}api/products`;
+  private readonly API_URL = `${environment.endpoint}cotizaciones`;
+  private readonly PRODUCTS_URL = `${environment.endpoint}products`;
 
   constructor(private http: HttpClient) {}
 
