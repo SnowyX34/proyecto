@@ -25,7 +25,8 @@ export const addProduct = async (req: Request<{}, {}, AddProductBody>, res: Resp
   const { modelo, color, costo_m2, productType, img_Url, descripcion } = req.body;
 
   if (!modelo || !color || !productType || !descripcion || costo_m2 == null) {
-    return res.status(400).json({ message: 'Faltan datos' });
+    res.status(400).json({ message: 'Faltan datos' });
+    return;
   }
 
   try {
@@ -48,16 +49,18 @@ export const addProduct = async (req: Request<{}, {}, AddProductBody>, res: Resp
       descripcion
     });
 
-    return res.status(201).json({
+    res.status(201).json({
       message: 'Producto agregado',
       product: newProduct
     });
+    return;
   } catch (error) {
     console.error('Error al agregar producto:', error);
-    return res.status(500).json({
+    res.status(500).json({
       message: 'Error al agregar producto',
       error: error instanceof Error ? error.message : 'Error desconocido'
     });
+    return;
   }
 };
 
@@ -69,7 +72,8 @@ export const updateProduct = async (req: Request<{ id: string }, {}, UpdateProdu
     const product = await Product.findByPk(id);
 
     if (!product) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
+      res.status(404).json({ message: 'Producto no encontrado' });
+      return;
     }
 
     const updateData: Partial<ProductAttributes & { img_Url?: string }> = {
@@ -101,16 +105,18 @@ export const updateProduct = async (req: Request<{ id: string }, {}, UpdateProdu
     await product.update(updateData);
     await product.reload();
 
-    return res.json({
+    res.json({
       message: 'Producto actualizado',
       product
     });
+    return;
   } catch (error) {
     console.error('Error al actualizar producto:', error);
-    return res.status(500).json({
+    res.status(500).json({
       message: 'Error al actualizar producto',
       error: error instanceof Error ? error.message : 'Error desconocido'
     });
+    return;
   }
 };
 
@@ -138,13 +144,15 @@ export const getAllProducts = async (req: Request, res: Response) => {
       ]
     });
 
-    return res.json(products);
+    res.json(products);
+    return;
   } catch (error) {
     console.error('Error al obtener productos:', error);
-    return res.status(500).json({
+    res.status(500).json({
       message: 'Error al obtener productos',
       error: error instanceof Error ? error.message : 'Error desconocido'
     });
+    return;
   }
 };
 
@@ -153,7 +161,8 @@ export const searchProducts = async (req: Request, res: Response) => {
   const { term } = req.query;
 
   if (!term || typeof term !== 'string') {
-    return res.status(400).json({ message: 'Se requiere un término de búsqueda' });
+    res.status(400).json({ message: 'Se requiere un término de búsqueda' });
+    return;
   }
 
   try {
@@ -167,15 +176,58 @@ export const searchProducts = async (req: Request, res: Response) => {
     });
 
     if (products.length === 0) {
-      return res.status(404).json({ message: 'No se encontraron productos con ese término' });
+      res.status(404).json({ message: 'No se encontraron productos con ese término' });
+      return;
     }
 
-    return res.json(products);
+    res.json(products);
+    return;
   } catch (error) {
     console.error('Error al buscar productos:', error);
-    return res.status(500).json({
+    res.status(500).json({
       message: 'Error al buscar productos',
       error: error instanceof Error ? error.message : 'Error desconocido'
     });
+    return;
+  }
+};
+
+export const deleteProduct = async (req: Request<{ id: string }>, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      res.status(404).json({ message: 'Producto no encontrado' });
+      return;
+    }
+
+    // Si tiene imagen en Cloudinary, eliminarla
+    if (product.img_Url && product.img_Url.includes('cloudinary.com')) {
+      const publicId = CloudinaryService.extractPublicId(product.img_Url);
+      if (publicId) {
+        try {
+          await CloudinaryService.deleteImage(publicId);
+          console.log('Imagen eliminada de Cloudinary');
+        } catch (error) {
+          console.warn('No se pudo eliminar la imagen de Cloudinary:', error);
+        }
+      }
+    }
+
+    await product.destroy();
+
+    res.json({
+      message: 'Producto eliminado correctamente'
+    });
+    return;
+  } catch (error) {
+    console.error('Error al eliminar producto:', error);
+    res.status(500).json({
+      message: 'Error al eliminar producto',
+      error: error instanceof Error ? error.message : 'Error desconocido'
+    });
+    return;
   }
 };

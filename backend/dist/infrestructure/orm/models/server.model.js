@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_routes_1 = __importDefault(require("../../../interfaces/routes/user.routes"));
-<<<<<<< HEAD
 const cotizaciones_routes_1 = __importDefault(require("../../../interfaces/routes/cotizaciones.routes"));
 const product_routes_1 = __importDefault(require("../../../interfaces/routes/product.routes"));
 const user_model_1 = require("../models/user.model"); // Importación con nombre
@@ -14,15 +13,6 @@ const product_model_1 = require("../models/product.model");
 const quotation_model_1 = __importDefault(require("../models/quotation.model"));
 const quotation_item_model_1 = __importDefault(require("../models/quotation-item.model"));
 const path_1 = __importDefault(require("path"));
-=======
-const cotizaciones_routes_1 = __importDefault(require("@routes/cotizaciones.routes"));
-const product_routes_1 = __importDefault(require("../../../interfaces/routes/product.routes"));
-const user_model_1 = require("../models/user.model");
-const path_1 = __importDefault(require("path"));
-const product_model_1 = require("../models/product.model");
-const quotation_model_1 = __importDefault(require("../models/quotation.model"));
-const quotation_item_model_1 = __importDefault(require("../models/quotation-item.model"));
->>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
 class Server {
     constructor() {
         var _a;
@@ -30,11 +20,7 @@ class Server {
         this.port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : '3000';
         this.middlewares();
         this.routes();
-<<<<<<< HEAD
         this.setupAssociations(); // Llama a setupAssociations ANTES de dbConnect
-=======
-        this.setupAssociations();
->>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592
         this.dbConnect();
         this.listen();
     }

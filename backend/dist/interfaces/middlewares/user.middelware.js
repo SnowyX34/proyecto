@@ -1,6 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-=======
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -65,4 +63,3 @@ const handleMulterError = (error, req, res, next) => {
     next(error);
 };
 exports.handleMulterError = handleMulterError;
->>>>>>> 5837d271ff19383e3e30f3ee65bcc6dcf81a5592

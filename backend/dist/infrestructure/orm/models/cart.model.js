@@ -3,14 +3,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// models/cart.model.ts
+exports.Cart = void 0;
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../../../config/connection"));
-const CartItem = connection_1.default.define('CartItem', {
+// Extendemos la clase `Model` con los atributos de nuestro DTO
+class Cart extends sequelize_1.Model {
+}
+exports.Cart = Cart;
+// Definición del modelo con Sequelize
+Cart.init({
     cart_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
     },
     user_id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -22,15 +27,15 @@ const CartItem = connection_1.default.define('CartItem', {
     },
     model: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true // Cambiar a true si no siempre se proporciona
+        allowNull: false
     },
     height: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true // Cambiar a true para permitir valores opcionales
+        allowNull: false
     },
     width: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true // Cambiar a true para permitir valores opcionales
+        allowNull: false
     },
     quantity: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -38,15 +43,12 @@ const CartItem = connection_1.default.define('CartItem', {
         defaultValue: 1
     },
     precio_total: {
-        type: sequelize_1.DataTypes.FLOAT,
-        allowNull: true // Se puede calcular después
-    },
-    img_URL: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: true // Agregar este campo que faltaba
+        type: sequelize_1.DataTypes.DECIMAL(10, 2),
+        allowNull: false
     }
 }, {
-    tableName: 'cart_items',
-    timestamps: true
+    sequelize: connection_1.default,
+    modelName: 'Cart',
+    tableName: 'cart',
+    timestamps: true // si quieres createdAt y updatedAt
 });
-exports.default = CartItem;
