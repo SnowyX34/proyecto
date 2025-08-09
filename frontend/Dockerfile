@@ -1,34 +1,25 @@
-# Stage 1: Build Angular application
+# Etapa 1: build Angular
 FROM node:20.19.1-alpine AS build
 
 WORKDIR /app
 
-# Copy all package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy source code
 COPY . .
+RUN npm run build -- --configuration=production --project=frontend
 
-# Build the Angular app for production
-RUN npm run build --configuration=production
-
-# Stage 2: Serve with nginx
+# Etapa 2: NGINX
 FROM nginx:alpine
 
-# Remove default nginx files
-RUN rm -rf /usr/share/nginx/html/*
+# Copiar build Angular
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
 
-# Copy built Angular app from build stage
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy custom nginx configuration
+# Opcional: Copiar configuración personalizada de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Exponer el puerto HTTP
 EXPOSE 80
 
-# Start nginx
+# Ejecutar NGINX en primer plano
 CMD ["nginx", "-g", "daemon off;"]
