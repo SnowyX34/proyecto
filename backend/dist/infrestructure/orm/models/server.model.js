@@ -44,9 +44,19 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
+        // Configuración CORS con variables de entorno
+        const allowedOrigins = process.env.ALLOWED_ORIGINS
+            ? process.env.ALLOWED_ORIGINS.split(',')
+            : [
+                'https://proyecto-1-yx7j.onrender.com',
+                'http://localhost:4200'
+            ];
+        console.log('CORS Origins permitidos:', allowedOrigins);
         this.app.use((0, cors_1.default)({
-            origin: 'https://proyecto-1-yx7j.onrender.com',
-            credentials: true
+            origin: allowedOrigins,
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization']
         }));
     }
     async dbConnect() {
