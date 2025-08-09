@@ -4,13 +4,13 @@ FROM node:20.19.1-alpine AS build
 WORKDIR /app
 
 # Copy package files first for better caching
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Debug: Check what files were copied
 RUN ls -la
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source code
 COPY . .
