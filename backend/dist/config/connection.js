@@ -7,5 +7,11 @@ const sequelize = new sequelize_1.Sequelize((_a = process.env.DB_NAME) !== null 
     port: parseInt((_e = process.env.DB_PORT) !== null && _e !== void 0 ? _e : '5432'),
     dialect: 'postgres',
     logging: false,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
 });
 exports.default = sequelize;
