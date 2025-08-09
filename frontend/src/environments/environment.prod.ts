@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  endpoint: 'https://backend-qelk.onrender.com/api/'
+  endpoint: 'https://proyecto-ljub.onrender.com/api/'
 };
