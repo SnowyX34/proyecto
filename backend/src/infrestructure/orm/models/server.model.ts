@@ -45,7 +45,7 @@ class Server {
     private middlewares() {
         this.app.use(express.json());
         this.app.use(cors({
-            origin: 'https://frontend-4sj7.onrender.com',
+            origin: 'https://proyecto-1-yx7j.onrender.com',
             credentials: true
         }));
     }
